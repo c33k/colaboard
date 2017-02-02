@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CardBoard</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="ColaBoardControl - página do controle do ColaBoard, que será usado para enviar comandos para o ColaBoard.">
+        <meta name="author" content="Rafael L. Toscano">
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    </head>
+    <body ng-app="cardboard">
+        <!--<a ui-sref="about" ui-sref-active="active">About</a>-->
+        <ui-view></ui-view>
+        
+        <!-- Mudar para pegar do vendor assim que criar o gulpfile -->
+        <script src="../node_modules/angular/angular.js"></script>
+        <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="./app/app.module.js"></script>
+    </body>
+</html>
