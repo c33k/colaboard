@@ -1,0 +1,23 @@
+{
+  "name": "colaboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c33k/colaboard.git"
+  },
+  "author": "Rafael L. Toscano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c33k/colaboard/issues"
+  },
+  "homepage": "https://github.com/c33k/colaboard#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}
