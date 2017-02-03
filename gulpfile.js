@@ -4,7 +4,7 @@ var webserver = require('gulp-webserver');
 var clean = require('gulp-clean');
 var concatCss = require('gulp-concat-css');
 
-var CTRL_BASE_PATH = 'control-app';
+var CTRL_BASE_PATH = 'sender';
 
 const paths = {
     images: path.join(CTRL_BASE_PATH, '/img/**/*'),
@@ -44,9 +44,9 @@ gulp.task('build', ['clean'], function() {
     gulp.src(paths.libs).pipe(gulp.dest(path.join(CTRL_BASE_PATH, '/build/js')));
 });
 
-gulp.task('controller-app', ['build'], function() {
+gulp.task('sender', ['build'], function() {
 
-  gulp.src('control-app')
+  gulp.src('sender')
     .pipe(webserver({
         livereload: true,
         open: true

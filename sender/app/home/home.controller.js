@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cardboard')
+        .module('sender')
         .controller('HomeController', HomeController);
 
     //HomeController.$inject = [];

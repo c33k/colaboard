@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cardboard', ['ui.router', 'ngMaterial'])
+        .module('sender', ['ui.router', 'ngMaterial'])
         .config(function($stateProvider, $urlRouterProvider) {
             
             var homeState = {
@@ -12,6 +12,7 @@
                 controller: 'HomeController as home'
             };
 
+            // TODO
             var aboutState = {
                 name: 'about',
                 url: '/about',
