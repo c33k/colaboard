@@ -24,7 +24,7 @@ gulp.task('clean', function() {
     .pipe(clean());
 });
 
-gulp.task('build', function() {
+gulp.task('build', ['clean'], function() {
     // Copy images
     gulp.src(paths.images).pipe(gulp.dest(path.join(CTRL_BASE_PATH, '/build/img')));
 
@@ -35,7 +35,7 @@ gulp.task('build', function() {
     gulp.src(paths.libs).pipe(gulp.dest(path.join(CTRL_BASE_PATH, '/build/js')));
 });
 
-gulp.task('default', ['clean', 'build'], function() {
+gulp.task('controller-app', ['build'], function() {
 
   gulp.src('control-app')
     .pipe(webserver({
