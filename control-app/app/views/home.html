@@ -4,13 +4,28 @@
         <img src="./img/colaboard-logo.png" />
     </div>
 
-    <form class="form-url">
-        <div class="input-group">
-            <input type="url" class="form-control" placeholder="Type an URL...">
+    <form class="form-url" name="urlForm" layout-xs="column" layout="row" layout-align="center center"> 
+        <!--<div class="input-group">
+            <input type="url" class="form-control" placeholder="Type an URL..." pattern= required>
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">GO!</button>
+                <button class="btn btn-primary" type="submit">GO!</button>
             </span>
-        </div><!-- /input-group -->
+        </div> /input-group -->
+
+        <md-input-container flex flex-gt-xs="90">
+          <label>URL</label>
+          <input required type="url" name="urlField" ng-model="home.url" ng-pattern="/^https?://.+/">
+
+          <div ng-messages="urlForm.urlField.$error" role="alert">
+            <div ng-message-exp="['required', 'pattern']">
+                You need to type a valid URL, starting with http:// or https://
+            </div>
+          </div>
+          
+        </md-input-container>
+        <section flex flex-gt-xs="10" class="btn-container">
+            <md-button class="md-raised md-warn" aria-label="Send">GO!</md-button>
+        </section>
     </form>
 
 </section>

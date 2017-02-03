@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('cardboard', ['ui.router'])
+    angular.module('cardboard', ['ui.router', 'ngMaterial'])
     .config(function($stateProvider, $urlRouterProvider) {
         
         var homeState = {
