@@ -3,6 +3,7 @@ var path = require('path');
 var webserver = require('gulp-webserver');
 var clean = require('gulp-clean');
 var concatCss = require('gulp-concat-css');
+var stylus = require('gulp-stylus');
 
 var base = {
     sender: 'sender/'
@@ -10,9 +11,10 @@ var base = {
 
 const paths = {
     images: 'img/**/*',
-    css: path.join(base.sender, '/app/**/*.css'),
     concatcss: '/css/app.css',
     build: 'build',
+    css: path.join(base.sender, '/app/**/*.css'),
+    stylus: path.join(base.sender, '/app/**/*.styl'),
     libs: [
         'node_modules/angular/angular.js',
         'node_modules/angular-ui-router/release/angular-ui-router.min.js',
@@ -31,24 +33,28 @@ gulp.task('clean', function() {
                .pipe(clean());
 });
 
-gulp.task('build', ['clean'], function() {
-    // Copy images
+gulp.task('images', ['clean'], function () {
     gulp.src(paths.images, {cwd: base.sender})
         .pipe(gulp.dest( path.join(paths.build, 'img'), {cwd: base.sender}) );
+});
 
-    /* 
-    * Get all CSSs files inside "app/", concatenate and copy into /build/css/app.css
-    */
-    gulp.src(paths.css)
-        .pipe(concatCss(paths.concatcss ))
+/*
+* Compile Stylus files into css and generate /css/app.css
+*/
+gulp.task('css', ['clean'], function () {
+    return gulp.src(paths.stylus)
+        .pipe(stylus( {compress: true} ))
+        .pipe(concatCss(paths.concatcss))
         .pipe(gulp.dest( paths.build, {cwd: base.sender} ))
+});
 
+gulp.task('build', ['clean'], function() {
     // Copy external modules
     gulp.src(paths.libs, {cwd: base.sender})
         .pipe(gulp.dest(path.join(paths.build, 'js'), {cwd: base.sender}));
 });
 
-gulp.task('sender', ['build'], function() {
+gulp.task('sender', ['images', 'css', 'build'], () => {
 
   gulp.src('sender')
     .pipe(webserver({
