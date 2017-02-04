@@ -4,20 +4,22 @@ var webserver = require('gulp-webserver');
 var clean = require('gulp-clean');
 var concatCss = require('gulp-concat-css');
 
-var CTRL_BASE_PATH = 'sender';
+var base = {
+    sender: 'sender/'
+};
 
 const paths = {
-    images: path.join(CTRL_BASE_PATH, '/img/**/*'),
-    css: path.join(CTRL_BASE_PATH, '/app/**/*.css'),
+    images: 'img/**/*',
+    css: path.join(base.sender, '/app/**/*.css'),
     concatcss: '/css/app.css',
-    build: path.join(CTRL_BASE_PATH, 'build/'),
+    build: 'build',
     libs: [
-        path.join(CTRL_BASE_PATH,'node_modules/angular/angular.js'),
-        path.join(CTRL_BASE_PATH,'node_modules/angular-ui-router/release/angular-ui-router.min.js'),
-        path.join(CTRL_BASE_PATH,'node_modules/angular-animate/angular-animate.min.js'),
-        path.join(CTRL_BASE_PATH,'node_modules/angular-aria/angular-aria.min.js'),
-        path.join(CTRL_BASE_PATH,'node_modules/angular-messages/angular-messages.min.js'),
-        path.join(CTRL_BASE_PATH,'node_modules/angular-material/angular-material.min.js')
+        'node_modules/angular/angular.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+        'node_modules/angular-animate/angular-animate.min.js',
+        'node_modules/angular-aria/angular-aria.min.js',
+        'node_modules/angular-messages/angular-messages.min.js',
+        'node_modules/angular-material/angular-material.min.js'
     ]
 };
 
@@ -25,23 +27,25 @@ const paths = {
 * Clean "build" folder
 */
 gulp.task('clean', function() {
-    return gulp.src(paths.build)
+    return gulp.src(paths.build, {cwd: base.sender})
                .pipe(clean());
 });
 
 gulp.task('build', ['clean'], function() {
     // Copy images
-    gulp.src(paths.images).pipe(gulp.dest(path.join(CTRL_BASE_PATH, '/build/img')));
+    gulp.src(paths.images, {cwd: base.sender})
+        .pipe(gulp.dest( path.join(paths.build, 'img'), {cwd: base.sender}) );
 
     /* 
     * Get all CSSs files inside "app/", concatenate and copy into /build/css/app.css
     */
     gulp.src(paths.css)
-        .pipe(concatCss(paths.concatcss))
-        .pipe(gulp.dest( path.join(paths.build) ))
+        .pipe(concatCss(paths.concatcss ))
+        .pipe(gulp.dest( paths.build, {cwd: base.sender} ))
 
     // Copy external modules
-    gulp.src(paths.libs).pipe(gulp.dest(path.join(CTRL_BASE_PATH, '/build/js')));
+    gulp.src(paths.libs, {cwd: base.sender})
+        .pipe(gulp.dest(path.join(paths.build, 'js'), {cwd: base.sender}));
 });
 
 gulp.task('sender', ['build'], function() {
